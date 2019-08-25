@@ -1562,8 +1562,9 @@ function parent_menu_selected(selected_obj)
                 <?php
                 $role=$this->session->userdata('userrole');
                 if($role== 1 || $role == 2 )
-                    {
-                        echo "<th>Actions</th>";
+                    {?>
+                        <th>Actions</th>
+                <?php
                     }
                 ?>
 
@@ -1588,7 +1589,7 @@ function parent_menu_selected(selected_obj)
                 {
                 ?>
 
-            <form name="organisationinfo" id="formid" action="<?php echo base_url() ?>home/update_hours/<?php echo $row1->Id?>/<?php echo $page ?>" method="post" enctype="multipart/form-data" >
+            <form name="organisationinfo" id="formid" action="<?php echo base_url()?>home/update_hours/<?php echo $row1->Id?>/<?php echo $page ?>" method="post" enctype="multipart/form-data" >
 
 
             <tr>
@@ -1616,19 +1617,22 @@ function parent_menu_selected(selected_obj)
                 <td>
                     <input type="text" id="totalhours<?php echo $row1->Id?>" class="input1" disabled>
                 </td>
-                <td>
+
                     <?php $role=$this->session->userdata('userrole');
                         if($role==1||$role==2)
                         {
-                            echo "<div class='new-form-ui-submit'>
+                            ?>
+                <td>
+                    <div class="new-form-ui-submit">
 
 
-                        <input type='submit' style='margin-left: 10%' name='submit' id='submitbutton$row1->Id' value='Update' disabled>		<a href='base_url()/home/delete_hours/$row1->Id/$page'><button type='button' style='background-color: red;padding: 2px 5px 5px 5px;'>Delete</button></a>
+                        <input type="submit" style="margin-left: 10%" name="submit" id="submitbutton<?php echo $row1->Id?>" value="Update" disabled>		<a href="<?php echo base_url()?>home/delete_hours/<?php echo $row1->Id?>/<?php echo $page?>"><button type="button" style="background-color: red;padding: 2px 5px 5px 5px;">Delete</button></a>
 
-                    </div>";
-                        } ?>
-
+                    </div>
                 </td>
+                        <?php } ?>
+
+
 
             </tr>
             </form>
@@ -1673,12 +1677,9 @@ function parent_menu_selected(selected_obj)
             <?php $role=$this->session->userdata('userrole');
                         if($role==1||$role==2)
                         {
+                            ?>
 
-                        }
-                        ?>
-
-
-            <form name="organisationinfo" id="formid" action="<?php echo base_url() ?>home/allocate_hours/<?php echo $pid?>/<?php echo $pcode?>" method="post" enctype="multipart/form-data" >
+                            <form name="organisationinfo" id="formid" action="<?php echo base_url() ?>home/allocate_hours/<?php echo $pid?>/<?php echo $pcode?>" method="post" enctype="multipart/form-data" >
 
 
 
@@ -1692,28 +1693,28 @@ function parent_menu_selected(selected_obj)
                         {
 
                                 ?>
-                                <option value="<?php echo($row->DeptId)?>" label="<?php echo($row->DeptName)?>"><?php echo($row->DeptName)?></option>
-                            <?php  } ?>
-                    </select>
+            <option value="<?php echo($row->DeptId)?>" label="<?php echo($row->DeptName)?>"><?php echo($row->DeptName)?></option>
+            <?php  } ?>
+            </select>
 
-                </td>
-                <td>
-                    <input type="text" id="estimatedhours" name="AllocatedHours" onchange="cal()" onmouseover="cal()" onmouseleave="cal()" onmouseout="cal()" value="0" class="input1">
-                </td>
-                <td>
-                    <input type="text" id="additionalhours" name="AdditionalHours" onchange="cal()" onmouseover="cal()" onmouseleave="cal()" onmouseout="cal()" value="0" class="input1">
-                </td>
-                <td>
-                    <input type="text" id="totalhours" class="input1">
-                </td>
-                <td>
-                    <div class="new-form-ui-submit" style="margin-left: 10%">
+            </td>
+            <td>
+                <input type="text" id="estimatedhours" name="AllocatedHours" onchange="cal()" onmouseover="cal()" onmouseleave="cal()" onmouseout="cal()" value="0" class="input1">
+            </td>
+            <td>
+                <input type="text" id="additionalhours" name="AdditionalHours" onchange="cal()" onmouseover="cal()" onmouseleave="cal()" onmouseout="cal()" value="0" class="input1">
+            </td>
+            <td>
+                <input type="text" id="totalhours" class="input1">
+            </td>
+            <td>
+                <div class="new-form-ui-submit" style="margin-left: 10%">
 
 
-                        <input type="submit" name="submit" id="submitbutton" value="Allocate">		<a href="<?php echo base_url();?>home/project_profile"><button type="button"  >Cancel</button></a>
+                    <input type="submit" name="submit" id="submitbutton" value="Allocate">		<a href="<?php echo base_url();?>home/project_profile"><button type="button"  >Cancel</button></a>
 
-                    </div>
-                </td>
+                </div>
+            </td>
 
             </tr>
 
@@ -1723,9 +1724,9 @@ function parent_menu_selected(selected_obj)
             var a=0;
             var b=0;
             var c=0;
-           a=document.getElementById("estimatedhours").value;
-           b=document.getElementById("additionalhours").value;
-           c = parseInt(a) + parseInt(b);
+            a=document.getElementById("estimatedhours").value;
+            b=document.getElementById("additionalhours").value;
+            c = parseInt(a) + parseInt(b);
             document.getElementById("totalhours").value = c;
         })();
         function cal() {
@@ -1738,8 +1739,13 @@ function parent_menu_selected(selected_obj)
             document.getElementById("totalhours").value = c;
         }
     </script>
-<br>
-</form>
+    <br>
+    </form>
+                        <?php }
+                        ?>
+
+
+
 
 </div>
 
