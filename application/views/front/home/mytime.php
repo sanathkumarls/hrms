@@ -1480,7 +1480,7 @@
                                                         var thuDay =moment(thu).format("DD/MM/YYYY");
                                                         var friDay =moment(fri).format("DD/MM/YYYY");
                                                         var satDay =moment(sat).format("DD/MM/YYYY");
-                                                        var sunDay =moment(endOfWeek).format("MM/DD/YYYY");
+                                                        var sunDay =moment(endOfWeek).format("DD/MM/YYYY");
 
                                                         document.getElementById("day1").innerHTML = monDay;
                                                         document.getElementById("monday").value = monDay;
@@ -1494,8 +1494,8 @@
                                                         document.getElementById("friday").value = friDay;
                                                         document.getElementById("day6").innerHTML = satDay;
                                                         document.getElementById("saturday").value = satDay;
-                                                        document.getElementById("day7").innerHTML = sunDay;
-                                                        document.getElementById("datepicker").value = sunDay;
+                                                        //document.getElementById("day7").innerHTML = sunDay;
+                                                        document.getElementById("datepicker").value = monDay;
                                                     }
 
                                                     function lastDate(){
@@ -1504,6 +1504,7 @@
                                                         {
                                                             var myDate = new Date(lDate);
                                                             document.getElementById('reset').click();
+                                                            var present = moment(myDate).toDate();
                                                             var startOfWeek = moment(myDate).startOf('isoweek').toDate();
                                                             var tue = moment(startOfWeek).add(1,'days').toDate();
                                                             var wed = moment(startOfWeek).add(2,'days').toDate();
@@ -1512,13 +1513,14 @@
                                                             var sat = moment(startOfWeek).add(5,'days').toDate();
                                                             var endOfWeek = moment(myDate).endOf('isoweek').toDate();
 
+                                                            var preDay =moment(present).format("DD/MM/YYYY");
                                                             var monDay =moment(startOfWeek).format("DD/MM/YYYY");
                                                             var tueDay =moment(tue).format("DD/MM/YYYY");
                                                             var wedDay =moment(wed).format("DD/MM/YYYY");
                                                             var thuDay =moment(thu).format("DD/MM/YYYY");
                                                             var friDay =moment(fri).format("DD/MM/YYYY");
                                                             var satDay =moment(sat).format("DD/MM/YYYY");
-                                                            var sunDay =moment(endOfWeek).format("MM/DD/YYYY");
+                                                            var sunDay =moment(endOfWeek).format("DD/MM/YYYY");
 
                                                             document.getElementById("day1").innerHTML = monDay;
                                                             document.getElementById("monday").value = monDay;
@@ -1532,8 +1534,8 @@
                                                             document.getElementById("friday").value = friDay;
                                                             document.getElementById("day6").innerHTML = satDay;
                                                             document.getElementById("saturday").value = satDay;
-                                                            document.getElementById("day7").innerHTML = sunDay;
-                                                            document.getElementById("datepicker").value = sunDay;
+                                                           // document.getElementById("day7").innerHTML = sunDay;
+                                                            document.getElementById("datepicker").value = preDay;
                                                         }
 
 
