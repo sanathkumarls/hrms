@@ -869,7 +869,7 @@ class Home extends CI_Controller {
             $thursday=$this->input->post('thursday');
             $friday=$this->input->post('friday');
             $saturday=$this->input->post('saturday');
-			$sunday=$this->input->post('sunday');
+			//$sunday=$this->input->post('sunday');
             $st1=$this->input->post('st1');
             $ot1=$this->input->post('ot1');
             $nb1=$this->input->post('nb1');
@@ -925,10 +925,10 @@ class Home extends CI_Controller {
 				$sat['ot']=$ot6;
 				$sat['nb']=$nb6;
 
-				$sun['date']=$sunday;
-				$sun['st']=$st7;
-				$sun['ot']=$ot7;
-				$sun['nb']=$nb7;
+//				$sun['date']=$sunday;
+//				$sun['st']=$st7;
+//				$sun['ot']=$ot7;
+//				$sun['nb']=$nb7;
 
 				$data = array(
 					'ProjectCode'=> $pcode,
@@ -940,7 +940,7 @@ class Home extends CI_Controller {
 					'Thursday' => json_encode($thu),
 					'Friday'=> json_encode($fri),
 					'Saturday' => json_encode($sat),
-					'Sunday' => json_encode($sun),
+					//'Sunday' => json_encode($sun),
 					'SubmittedBy' => $uid
 				);
 
@@ -957,7 +957,7 @@ class Home extends CI_Controller {
 
     public function timesheet_added()
     {
-        if($this->session->userdata('useremail') != '' && $this->session->userdata('username') != '' && $this->session->userdata('rolename') != '' && $this->session->userdata('rolemodify') != '' && $this->session->userdata('roleadd') == 'Y')
+        if($this->session->userdata('useremail') != '' && $this->session->userdata('username') != '' && $this->session->userdata('rolename') != '' && $this->session->userdata('rolemodify') != '' && $this->session->userdata('roleadd') != '')
         {
             echo "<script>alert('Timesheet Uploaded Successfully')</script>";
             $this->mytime();
