@@ -869,6 +869,7 @@ class Home extends CI_Controller {
             $thursday=$this->input->post('thursday');
             $friday=$this->input->post('friday');
             $saturday=$this->input->post('saturday');
+			$sunday=$this->input->post('sunday');
             $st1=$this->input->post('st1');
             $ot1=$this->input->post('ot1');
             $nb1=$this->input->post('nb1');
@@ -887,40 +888,62 @@ class Home extends CI_Controller {
             $st6=$this->input->post('st6');
             $ot6=$this->input->post('ot6');
             $nb6=$this->input->post('nb6');
+			$st7=$this->input->post('st7');
+			$ot7=$this->input->post('ot7');
+			$nb7=$this->input->post('nb7');
             $uid=$this->session->userdata('uid');
 //validate step later
             if($pcode!='' && $oem!='' && $monday!='' && $tuesday!='' && $wednesday!='' && $thursday!='' && $friday!='' && $saturday!='' && $st1!='' && $ot1!='' && $nb1!='' && $st2!='' && $ot2!='' && $nb2!='' && $st3!='' && $ot3!='' && $nb3!='' && $st4!='' && $ot4!='' && $nb4!='' && $st5!='' && $ot5!='' && $nb5!='' && $st6!='' && $ot6!='' && $nb6!='')
             {
-                $data = array(
-                    'ProjectCode'=> $pcode,
-                    'Oem' => $oem,
-                    'Step' => $step,
-                    'Monday'=> $monday,
-                    'St1' => $st1,
-                    'Ot1' => $ot1,
-                    'Nb1' => $nb1,
-                    'Tuesday' => $tuesday,
-                    'St2' => $st2,
-                    'Ot2' => $ot2,
-                    'Nb2' => $nb2,
-                    'Wednesday'=> $wednesday,
-                    'St3' => $st3,
-                    'Ot3' => $ot3,
-                    'Nb3' => $nb3,
-                    'Thursday' => $thursday,
-                    'St4' => $st4,
-                    'Ot4' => $ot4,
-                    'Nb4' => $nb4,
-                    'Friday'=> $friday,
-                    'St5' => $st5,
-                    'Ot5' => $ot5,
-                    'Nb5' => $nb5,
-                    'Saturday' => $saturday,
-                    'St6' => $st6,
-                    'Ot6' => $ot6,
-                    'Nb6' => $nb6,
-                    'SubmittedBy' => $uid
-                );
+				$mon['date']=$monday;
+				$mon['st']=$st1;
+				$mon['ot']=$ot1;
+				$mon['nb']=$nb1;
+
+				$tue['date']=$tuesday;
+				$tue['st']=$st2;
+				$tue['ot']=$ot2;
+				$tue['nb']=$nb2;
+
+				$wed['date']=$wednesday;
+				$wed['st']=$st3;
+				$wed['ot']=$ot3;
+				$wed['nb']=$nb3;
+
+				$thu['date']=$thursday;
+				$thu['st']=$st4;
+				$thu['ot']=$ot4;
+				$thu['nb']=$nb4;
+
+				$fri['date']=$friday;
+				$fri['st']=$st5;
+				$fri['ot']=$ot5;
+				$fri['nb']=$nb5;
+
+				$sat['date']=$saturday;
+				$sat['st']=$st6;
+				$sat['ot']=$ot6;
+				$sat['nb']=$nb6;
+
+				$sun['date']=$sunday;
+				$sun['st']=$st7;
+				$sun['ot']=$ot7;
+				$sun['nb']=$nb7;
+
+				$data = array(
+					'ProjectCode'=> $pcode,
+					'Oem' => $oem,
+					'Step' => $step,
+					'Monday'=> json_encode($mon),
+					'Tuesday' => json_encode($tue),
+					'Wednesday'=>json_encode($wed),
+					'Thursday' => json_encode($thu),
+					'Friday'=> json_encode($fri),
+					'Saturday' => json_encode($sat),
+					'Sunday' => json_encode($sun),
+					'SubmittedBy' => $uid
+				);
+
                 $this->load->model('Timesheet');
                 $this->Timesheet->add_timesheet($data);
                 redirect(base_url()."home/timesheet_added");
@@ -944,6 +967,7 @@ class Home extends CI_Controller {
             redirect(base_url());
         }
     }
+
 
 	
 }
