@@ -1363,7 +1363,7 @@
 
                                                         <tr>
                                                             <td >
-                                                                <select class="select-small" name="pcode" onchange="enable()">
+                                                                <select class="select-small" name="pcode" id="pcode" onchange="enable(),setOem()">
                                                                     <option value="">Select</option>
                                             <?php
                                             for($i=1;$i<=$num;$i++) {
@@ -1375,15 +1375,7 @@
                                                                 </select>
                                                             </td>
                                                             <td>
-                                                                <select class="select-small" name="oem" onchange="enable()">
-                                                                    <option value="">Select</option>
-                                                                    <?php
-                                                                    for($i=1;$i<=$num;$i++) {
-                                                                    foreach ($data['project'.$i]->result() as $row) {
-                                                                    ?>
-                                                                        <option value="<?php echo $row->Oem?>"><?php echo $row->Oem?></option>
-                                                                    <?php  } }?>
-                                                                </select>
+																<input class="input" name="oem" id="oem"">
                                                             </td>
                                                             <td>
                                                                 <input class="input-small" name="step" onchange="enable()">
@@ -1430,7 +1422,8 @@
 
     <br><br>
     <div class="new-form-ui-submit">
-        <input type="submit" name="submit" id="submitbutton" value="Save" hidden>
+        <input type="submit" name="submit" id="savebutton" value="Save" hidden>
+		<input type="submit" name="submit" id="submitbutton" value="Submit" hidden>
         <button type="button" id="btn_cancel" name="add_org_head" hidden>Cancel</button>
         <button type="reset" id="reset" hidden></button>
 
@@ -1443,7 +1436,22 @@
             btn1.hidden=false;
             var btn2=document.getElementById('btn_cancel');
             btn2.hidden=false;
+            var btn3=document.getElementById('savebutton');
+            btn3.hidden=false;
         }
+
+		function setOem()
+		{
+		    var pcode=document.getElementById('pcode').value;
+
+            $(document).ready(function()
+            {
+                $.ajax({url: "<?php echo base_url()?>home/getoem/"+pcode, success: function(result)
+                    {
+                        $("#oem").val(result);
+                    }});
+            });
+		}
 
     </script>
 

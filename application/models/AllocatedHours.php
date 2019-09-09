@@ -33,4 +33,7 @@ class AllocatedHours extends CI_Model {
         $this->db->where("Id", $id);
         $this->db->delete("allocatedhours");
     }
+
+
+
 }

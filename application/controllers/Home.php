@@ -804,13 +804,24 @@ class Home extends CI_Controller {
                 $data['pid']=$row->ProjectId;
                 $i++;
             }
-            $this->load->model('Project');
+			$this->load->model('Project');
             $this->load->view('front/home/header');
             $this->load->view('front/home/mytime',$data);
         }
         else
             redirect(base_url());
     }
+
+	public function getoem($pcode)
+	{
+		if($this->session->userdata('useremail') != '' && $this->session->userdata('username') != '' && $this->session->userdata('rolename') != '' && $this->session->userdata('rolemodify') != '' && $this->session->userdata('roleadd') != '')
+		{
+			$this->load->model('Project');
+			$oem=$this->Project->getoem($pcode);
+			echo $oem;
+		}
+
+	}
 
     public  function myleave()
     {
@@ -860,6 +871,7 @@ class Home extends CI_Controller {
     {
         if($this->session->userdata('useremail') != '' && $this->session->userdata('username') != '' && $this->session->userdata('rolename') != '' && $this->session->userdata('rolemodify') != '' && $this->session->userdata('roleadd') != '')
         {
+        	$action= $this->input->post('submit');
             $pcode=$this->input->post('pcode');
             $oem=$this->input->post('oem');
             $step=$this->input->post('step');
@@ -892,6 +904,20 @@ class Home extends CI_Controller {
 			$ot7=$this->input->post('ot7');
 			$nb7=$this->input->post('nb7');
             $uid=$this->session->userdata('uid');
+
+
+			if($action == "Save")
+			{
+				echo "save";
+				return;
+			}
+			elseif ($action == "Submit")
+			{
+				echo "submit";
+				return;
+			}
+
+
 //validate step later
             if($pcode!='' && $oem!='' && $monday!='' && $tuesday!='' && $wednesday!='' && $thursday!='' && $friday!='' && $saturday!='' && $st1!='' && $ot1!='' && $nb1!='' && $st2!='' && $ot2!='' && $nb2!='' && $st3!='' && $ot3!='' && $nb3!='' && $st4!='' && $ot4!='' && $nb4!='' && $st5!='' && $ot5!='' && $nb5!='' && $st6!='' && $ot6!='' && $nb6!='')
             {
@@ -930,6 +956,8 @@ class Home extends CI_Controller {
 //				$sun['ot']=$ot7;
 //				$sun['nb']=$nb7;
 
+
+
 				$data = array(
 					'ProjectCode'=> $pcode,
 					'Oem' => $oem,
@@ -946,7 +974,7 @@ class Home extends CI_Controller {
 
                 $this->load->model('Timesheet');
                 $this->Timesheet->add_timesheet($data);
-                redirect(base_url()."home/timesheet_added");
+                redirect(base_url()."home/timesheet_saved");
             }
             else
                 redirect(base_url()."home/mytime");
@@ -955,11 +983,11 @@ class Home extends CI_Controller {
             redirect(base_url());
     }
 
-    public function timesheet_added()
+    public function timesheet_saved()
     {
         if($this->session->userdata('useremail') != '' && $this->session->userdata('username') != '' && $this->session->userdata('rolename') != '' && $this->session->userdata('rolemodify') != '' && $this->session->userdata('roleadd') != '')
         {
-            echo "<script>alert('Timesheet Uploaded Successfully')</script>";
+            echo "<script>alert('Timesheet Saved Successfully')</script>";
             $this->mytime();
         }
         else
@@ -967,6 +995,19 @@ class Home extends CI_Controller {
             redirect(base_url());
         }
     }
+
+	public function timesheet_submitted()
+	{
+		if($this->session->userdata('useremail') != '' && $this->session->userdata('username') != '' && $this->session->userdata('rolename') != '' && $this->session->userdata('rolemodify') != '' && $this->session->userdata('roleadd') != '')
+		{
+			echo "<script>alert('Timesheet Submited Successfully')</script>";
+			$this->mytime();
+		}
+		else
+		{
+			redirect(base_url());
+		}
+	}
 
 
 }

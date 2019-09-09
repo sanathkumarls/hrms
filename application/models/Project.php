@@ -52,6 +52,15 @@ class Project extends CI_Model {
             return $row->ProjectCode;
     }
 
+	function  getoem($pcode)
+	{
+		$this->db->select('*');
+		$this->db->where('ProjectCode',$pcode);
+		$result=$this->db->get("project");
+		foreach ($result->result() as $row)
+			return $row->Oem;
+	}
+
     function update_project($data,$id)
     {
         $this->db->where('Id',$id);
