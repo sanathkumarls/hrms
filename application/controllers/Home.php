@@ -908,48 +908,38 @@ class Home extends CI_Controller {
 
 			if($action == "Save")
 			{
-				echo "save";
-				return;
-			}
-			elseif ($action == "Submit")
-			{
-				echo "submit";
-				return;
-			}
+				//validate step later
+				if($pcode!='' && $oem!='' && $monday!='' && $tuesday!='' && $wednesday!='' && $thursday!='' && $friday!='' && $saturday!='' && $uid !='')
+				{
+					$mon['date']=$monday;
+					$mon['st']=$st1;
+					$mon['ot']=$ot1;
+					$mon['nb']=$nb1;
 
+					$tue['date']=$tuesday;
+					$tue['st']=$st2;
+					$tue['ot']=$ot2;
+					$tue['nb']=$nb2;
 
-//validate step later
-            if($pcode!='' && $oem!='' && $monday!='' && $tuesday!='' && $wednesday!='' && $thursday!='' && $friday!='' && $saturday!='' && $st1!='' && $ot1!='' && $nb1!='' && $st2!='' && $ot2!='' && $nb2!='' && $st3!='' && $ot3!='' && $nb3!='' && $st4!='' && $ot4!='' && $nb4!='' && $st5!='' && $ot5!='' && $nb5!='' && $st6!='' && $ot6!='' && $nb6!='')
-            {
-				$mon['date']=$monday;
-				$mon['st']=$st1;
-				$mon['ot']=$ot1;
-				$mon['nb']=$nb1;
+					$wed['date']=$wednesday;
+					$wed['st']=$st3;
+					$wed['ot']=$ot3;
+					$wed['nb']=$nb3;
 
-				$tue['date']=$tuesday;
-				$tue['st']=$st2;
-				$tue['ot']=$ot2;
-				$tue['nb']=$nb2;
+					$thu['date']=$thursday;
+					$thu['st']=$st4;
+					$thu['ot']=$ot4;
+					$thu['nb']=$nb4;
 
-				$wed['date']=$wednesday;
-				$wed['st']=$st3;
-				$wed['ot']=$ot3;
-				$wed['nb']=$nb3;
+					$fri['date']=$friday;
+					$fri['st']=$st5;
+					$fri['ot']=$ot5;
+					$fri['nb']=$nb5;
 
-				$thu['date']=$thursday;
-				$thu['st']=$st4;
-				$thu['ot']=$ot4;
-				$thu['nb']=$nb4;
-
-				$fri['date']=$friday;
-				$fri['st']=$st5;
-				$fri['ot']=$ot5;
-				$fri['nb']=$nb5;
-
-				$sat['date']=$saturday;
-				$sat['st']=$st6;
-				$sat['ot']=$ot6;
-				$sat['nb']=$nb6;
+					$sat['date']=$saturday;
+					$sat['st']=$st6;
+					$sat['ot']=$ot6;
+					$sat['nb']=$nb6;
 
 //				$sun['date']=$sunday;
 //				$sun['st']=$st7;
@@ -958,26 +948,92 @@ class Home extends CI_Controller {
 
 
 
-				$data = array(
-					'ProjectCode'=> $pcode,
-					'Oem' => $oem,
-					'Step' => $step,
-					'Monday'=> json_encode($mon),
-					'Tuesday' => json_encode($tue),
-					'Wednesday'=>json_encode($wed),
-					'Thursday' => json_encode($thu),
-					'Friday'=> json_encode($fri),
-					'Saturday' => json_encode($sat),
-					//'Sunday' => json_encode($sun),
-					'SubmittedBy' => $uid
-				);
+					$data = array(
+						'ProjectCode'=> $pcode,
+						'Oem' => $oem,
+						'Step' => $step,
+						'Monday'=> json_encode($mon),
+						'Tuesday' => json_encode($tue),
+						'Wednesday'=>json_encode($wed),
+						'Thursday' => json_encode($thu),
+						'Friday'=> json_encode($fri),
+						'Saturday' => json_encode($sat),
+						//'Sunday' => json_encode($sun),
+						'SubmittedBy' => $uid,
+					);
 
-                $this->load->model('Timesheet');
-                $this->Timesheet->add_timesheet($data);
-                redirect(base_url()."home/timesheet_saved");
-            }
-            else
-                redirect(base_url()."home/mytime");
+					$this->load->model('Timesheet');
+					$this->Timesheet->add_timesheet($data);
+					redirect(base_url()."home/timesheet_saved");
+				}
+				else
+					redirect(base_url()."home/mytime");
+
+			}
+			elseif ($action == "Submit")
+			{
+				//validate step later
+				if($pcode!='' && $oem!='' && $monday!='' && $tuesday!='' && $wednesday!='' && $thursday!='' && $friday!='' && $saturday!='' && $st1!='' && $ot1!='' && $nb1!='' && $st2!='' && $ot2!='' && $nb2!='' && $st3!='' && $ot3!='' && $nb3!='' && $st4!='' && $ot4!='' && $nb4!='' && $st5!='' && $ot5!='' && $nb5!='' && $st6!='' && $ot6!='' && $nb6!='' && $uid !='')
+				{
+					$mon['date']=$monday;
+					$mon['st']=$st1;
+					$mon['ot']=$ot1;
+					$mon['nb']=$nb1;
+
+					$tue['date']=$tuesday;
+					$tue['st']=$st2;
+					$tue['ot']=$ot2;
+					$tue['nb']=$nb2;
+
+					$wed['date']=$wednesday;
+					$wed['st']=$st3;
+					$wed['ot']=$ot3;
+					$wed['nb']=$nb3;
+
+					$thu['date']=$thursday;
+					$thu['st']=$st4;
+					$thu['ot']=$ot4;
+					$thu['nb']=$nb4;
+
+					$fri['date']=$friday;
+					$fri['st']=$st5;
+					$fri['ot']=$ot5;
+					$fri['nb']=$nb5;
+
+					$sat['date']=$saturday;
+					$sat['st']=$st6;
+					$sat['ot']=$ot6;
+					$sat['nb']=$nb6;
+
+//				$sun['date']=$sunday;
+//				$sun['st']=$st7;
+//				$sun['ot']=$ot7;
+//				$sun['nb']=$nb7;
+
+
+
+					$data = array(
+						'ProjectCode'=> $pcode,
+						'Oem' => $oem,
+						'Step' => $step,
+						'Monday'=> json_encode($mon),
+						'Tuesday' => json_encode($tue),
+						'Wednesday'=>json_encode($wed),
+						'Thursday' => json_encode($thu),
+						'Friday'=> json_encode($fri),
+						'Saturday' => json_encode($sat),
+						//'Sunday' => json_encode($sun),
+						'SubmittedBy' => $uid,
+						'IsSubmitted' => 1
+					);
+
+					$this->load->model('Timesheet');
+					$this->Timesheet->add_timesheet($data);
+					redirect(base_url()."home/timesheet_submitted");
+				}
+				else
+					redirect(base_url()."home/mytime");
+			}
         }
         else
             redirect(base_url());
@@ -1008,6 +1064,8 @@ class Home extends CI_Controller {
 			redirect(base_url());
 		}
 	}
+
+
 
 
 }
