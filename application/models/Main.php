@@ -222,6 +222,12 @@ class Main extends CI_Model {
         $department = $this->db->get("msdepartment");
         return $department;
     }
+
+	function selectdesignation()
+	{
+		$designation = $this->db->get("msdesignation");
+		return $designation;
+	}
 	
 	function add_employee($data)
 	{
@@ -232,8 +238,8 @@ class Main extends CI_Model {
 	{
 		
 		$this->db->like('fname',$fname);
-		$this->db->like('lname',$lname);
-		$this->db->where('estatus',1);
+		$this->db->or_like('lname',$lname);
+		//$this->db->where('estatus',1);
 		$result = $this->db->get("employee");
 		return $result;
 	}

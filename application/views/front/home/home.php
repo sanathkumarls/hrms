@@ -25,7 +25,7 @@
 			$doj = $row->doj;
 			$estatus = $row->estatus;
 			$etype = $row->etype;
-			$designation = $row->designation;
+			$designation1 = $row->designation;
 			$department = $row->department;
 			$billing = $row->billing;
 			$minumber = $row->minumber;
@@ -1260,7 +1260,15 @@ function parent_menu_selected(selected_obj)
 
         <div class="division">
 <select name="designation" id="position_id" <?php if($this->session->userdata('rolemodify')!="Y"){echo "disabled";}?> onChange="enable()">
-    <option value="<?php echo $designation;?>" label="<?php echo $designation;?>"><?php echo $designation;?></option>
+    <option value="<?php echo $designation1;?>" label="<?php echo $designation1;?>"><?php echo $designation1;?></option>
+	<?php
+	foreach($designation->result() as $row)
+	{
+		if($designation1 != $row->DesignationName)
+		{
+			?>
+			<option value="<?php echo($row->DesignationName)?>" label="<?php echo($row->DesignationName)?>"><?php echo($row->DesignationName)?></option>
+		<?php } } ?>
 </select>                               <!--  <span class="errors" id="errors-position_id">Positions are not configured yet.</span>-->
 
         	        

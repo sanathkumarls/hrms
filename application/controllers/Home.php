@@ -59,7 +59,7 @@ class Home extends CI_Controller {
 				$data['country'] =$this->Main->selectcountry();
                 $data['departments'] =$this->Main->selectdepartment();
 				$data['employee'] =$this->Main->selectemployee($useremail);
-
+				$data['designation'] =$this->Main->selectdesignation();
 				$this->load->view('front/home/header');
 				$this->load->view('front/home/home',$data);
 				//$this->load->view('front/home/footer'); 	
@@ -438,6 +438,7 @@ class Home extends CI_Controller {
 				$data['rolename'] =$this->Main->selectrolename();
 				$data['country'] =$this->Main->selectcountry();
                 $data['departments'] =$this->Main->selectdepartment();
+				$data['designation'] =$this->Main->selectdesignation();
 				$data['employee'] =$this->Main->searchresult($fname,$lname);
 				$this->load->view('front/home/header');
 				$this->load->view('front/home/home',$data);
